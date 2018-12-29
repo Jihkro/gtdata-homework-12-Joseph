@@ -1,11 +1,11 @@
 function buildMetadata(sample) {
 
   // @TODO: Complete the following function that builds the metadata panel
-  console.log(`running BuildMeta for sample: ${sample}`);
+  //console.log(`running BuildMeta for sample: ${sample}`);
   // Use `d3.json` to fetch the metadata for a sample
-  d3.json(`http://localhost:5000/metadata/${sample}`).then(function(data){
+  d3.json(`/metadata/${sample}`).then(function(data){
     // Use d3 to select the panel with id of `#sample-metadata`
-    console.log('inside of json request');
+    //console.log('inside of json request');
     var samplebox = d3.select("#sample-metadata");
     // Use `.html("") to clear any existing metadata
     samplebox.html("");
@@ -25,7 +25,7 @@ function buildMetadata(sample) {
 function buildCharts(sample) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
-  d3.json(`http://localhost:5000/samples/${sample}`).then(function(data){
+  d3.json(`/samples/${sample}`).then(function(data){
 
     maxotuid = Math.max.apply(Math,data.otu_ids);
     maxsample_value = Math.max.apply(Math,data.sample_values);
@@ -103,7 +103,7 @@ function init() {
 
 function optionChanged(newSample) {
   // Fetch new data each time a new sample is selected
-  console.log('saw something changed');
+  //console.log('saw something changed');
   Plotly.deleteTraces('bubble',0);
   buildCharts(newSample);
   buildMetadata(newSample);
